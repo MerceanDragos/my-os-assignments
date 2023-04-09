@@ -621,8 +621,10 @@ int has_15_line_section ( char *path, SF_header *header )
 				cursor++;
 			}
 
-			if( no_lines == 15 )
+			if( no_lines == 15 ) {
+				free(section_buf);
 				return 0;
+			}
 
 			current_section++;
 			free(section_buf);
@@ -765,6 +767,8 @@ int main ( int argc, char **argv )
 			print_parse_error(error_code);
 		else
 			extract ( &extract_param, &header );
+
+		free(header.section_headers);
 
 	}
 	else if ( strcmp(argv[1], "findall") == 0 )
