@@ -622,15 +622,20 @@ int has_15_line_section ( char *path, SF_header *header )
 			}
 
 			if( no_lines == 15 ) {
+				close(fd);
 				free(section_buf);
 				return 0;
 			}
 
 			current_section++;
 			free(section_buf);
+
 		}
 		else
+		{
+			close(fd);
 			return 1;
+		}
 	}
 }
 
